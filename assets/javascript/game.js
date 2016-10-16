@@ -167,6 +167,23 @@ function whoWon(){
     }
 }
 
+ 
+function beforeRestart(){
+    
+    $('#btnAttackRestart').attr("disabled",false);
+    $('#btnAttackRestart').html("Restart");
+    $('#message').html("Press restart to play again");
+}
+
+function restart(){
+    
+    $('.character').each(function(idx,ele){
+            $(ele).show();
+            $('#characters').prepend($(ele));
+        });
+    fightNow();
+}
+
 
 // Play/Pause Song //
 $(document).ready(function() {
