@@ -118,11 +118,54 @@ function attack() {
     
     $('#msgBattle').html("<span>"+"You attacked "+characters[cpu].name+" for "+characters[player].attackStrength+" damage."+"</span>"+"<br>"
                         + "<span>" + characters[cpu].name + " attacked you back for " +characters[cpu].attackStrength + " damage."+"</span>");
+
+    whoWon();
 }
 
-//Conditions for defeating first enemy, winning by defeating all three, losing, and tie
-
-//Results
+//Conditions for tie, winning, losing
+function whoWon(){
+        //Tie Game
+    if(playerScore===0 && cpuScore===0){
+        console.log("here 1");
+        $('#message').html("<span>"+"It's a tie. Game over...!"+"</span>"+"<br>");
+        beforeRestart();    
+        return;
+     //Defeated
+    }else if (playerScore <= 0 && cpuScore>0){
+        console.log("here 2");
+        $('#message').html("<span>"+"You got defeated by "+characters[cpu].name+". Game over...!"+"</span>"+"<br>");
+        beforeRestart();
+        return;
+     //Lose game over
+    }else if(playerScore<0 && cpuScore<0){
+        console.log("here 3");
+        $('#msgBattle').prepend("<span>"+"You lost. Better luck next time. Game over!"+"</span>"+"<br>");
+        beforeRestart();
+        return;
+     //Beat one enemy
+    }else if(playerScore>0 &&  cpuScore<=0){
+        console.log("here 4");      
+        $('#msgBattle').prepend("<span>"+"You defeated "+characters[cpu].name+"</span>"+"<br>");
+        
+        if($('#characters').children().length ===0){
+            $('#msgBattle').prepend("<span>"+"You defeated all the enemeis. WOOO!"+"</span>"+"<br>");
+            $('#msgCharacters').html("CONGRATULATIONS..!!!!");  
+            beforeRestart();
+        }else{
+            $('#message').html("Pick another enemy to fight.");
+        }
+        
+        if($('#btnAttackRestart').html() ==="Attack"){
+            $('#'+cpu).hide();
+            cpu=undefined;
+            $('#btnAttackRestart').attr("disabled",true);
+            $('#characters').children().prop("disabled",false);
+        }
+    }else if(defenderScore>0 &&  attackerScore>0){
+        console.log("here 5");
+        $('#btnAttackRestart').attr("disabled",false);
+    }
+}
 
 
 // Play/Pause Song //
