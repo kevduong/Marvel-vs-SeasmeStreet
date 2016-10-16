@@ -126,3 +126,25 @@ function attack() {
 
 
 // Play/Pause Song //
+$(document).ready(function() {
+
+$(".themeButton").on("click", function(){
+                audioElement.play();
+            });
+
+            $(".pauseButton").on("click", function(){
+                audioElement.pause();
+            });
+
+ var audioElement = document.createElement('audio');
+            audioElement.setAttribute('src', 'assets/8bit-sesamestreet.mp3');
+
+            // Theme Button
+            $(".themeButton").on("click", function(){
+                audioElement.play();
+            });
+
+            $(".pauseButton").on("click", function(){
+                audioElement.pause();
+            });
+});
