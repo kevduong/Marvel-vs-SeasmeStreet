@@ -29,6 +29,12 @@ var characters = [{
 	strengthAttack: 20
 }];
 
+// Start Game
+fightNow();
+$('#characters').on('click', '.character', pickPlayerandCpu);
+$('#btnAttackRestart').click(attackRestart);
+
+
 // Setting function before the fight
 function fightNow() {
     
@@ -47,7 +53,7 @@ function fightNow() {
         //Replace fig by object hp value
         $('#'+ i +' > figcaption:last-child').text(characters[i].hp);
         
-        //Ask Cameron or Charlie/Angie
+        //^^Ask Cameron or Charlie/Angie^^
         console.log("why is # working but not #characters .character");
         
         
@@ -62,15 +68,57 @@ function fightNow() {
     }
 }
 
-// Start Game
-fightNow();
-$('#characters').on('click', '.character', pickPlayerandCpu);
-$('#btnAttackRestart').click(attackRestart);
 
 // Pick a character
 
+function selectCharacter() {
+    
+    console.log ("start");
+    
+    if (player === undefined) {
+        
+        player = parseInt($(this).attr('id')); // convert to integer & add
+        $('#chosenPlayer').prepend($(this));   //div goes behind selected character
+        playerScore = characters[player].hp;    
+        attackStrength = characters[player].attackStrength;
+        $('#message').html("Pick enemy to fight");
+        $('#msgCharacters').html("Available Enemies");
+        
+    }else if (cpu === undefined){
+        
+        cpu = parseInt($(this).attr('id'));
+        cpuScore = characters[cpu].hp;
+        $('#cpu').prepend($(this));
+        $('#characters').children().prop("disabled", true);
+        $('#btnAttackRestart').show();
+        $('#btnAttackRestart').attr("disabled", false);
+        $('#message').html("ATTACK");
+        if ($('#characters').children().length === 0) {
+            $('#msgCharacters').html("No enemies left.");
+        }
+    }
+}
 // Player clicks 'btnAttack' to reduce HP of CPU.
-// CPU attacks back
+
+function attackRestart() {
+    if($('#btnAttackRestart').html() === "Restart") {
+        restart();
+    }else if ($('#btnAttackRestart').html() === "Attack") {
+        attack();
+    }
+}
+// PLayer attacks and CPU attacks back
+function attack() {
+    
+    cpuScore -= attackStrength; 
+    playerScore -= characters[cpu].attackStrength;
+    
+    $('#'+ player +' > figcaption:last').text(playerScore);
+    $('#'+ cpu +' > figcaption:last').text(cpuScore);
+    
+    $('#msgBattle').html("<span>"+"You attacked "+characters[cpu].name+" for "+characters[player].attackStrength+" damage."+"</span>"+"<br>"
+                        + "<span>" + characters[cpu].name + " attacked you back for " +characters[cpu].attackStrength + " damage."+"</span>");
+}
 
 //Conditions for defeating first enemy, winning by defeating all three, losing, and tie
 
