@@ -30,14 +30,42 @@ var characters = [{
 }];
 
 // Setting function before the fight
+function fightNow() {
     
-//Set values. Refer to calculator assignment.    
+    //Set values. Refer to calculator assignment.
+    player = undefined;
+    cpu = undefined;
+    attackStrength = 0;
+    playerScore = 0;
+    cpuScore = 0
     
-//Loop - Add HP and Name variable to characters
-      
-//Messages and Buttons
+    //Loop - Add HP and Name variable to characters
+    for(var i=0;i<characters.length;i++){
+        
+        //Replace fig by object name value
+        $('#' + i +' > figcaption:first-child').text(characters[i].name); 
+        //Replace fig by object hp value
+        $('#'+ i +' > figcaption:last-child').text(characters[i].hp);
+        
+        //Ask Cameron or Charlie/Angie
+        console.log("why is # working but not #characters .character");
+        
+        
+        //Messages and Buttons
+            $('#message').html("Pick a character");
+            $('#msgBattle').html("");
+            $('#msgCharacters').html("Available characters");
+
+            $('#btnAttackRestart').html("Attack");
+            $('#btnAttackRestart').hide();      //switches from Attack and Restart btn
+
+    }
+}
 
 // Start Game
+fightNow();
+$('#characters').on('click', '.character', pickPlayerandCpu);
+$('#btnAttackRestart').click(attackRestart);
 
 // Pick a character
 
