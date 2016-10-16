@@ -1,0 +1,57 @@
+body {
+    background-image: url('../images/background.jpg');
+    background-size: cover;
+}
+
+.header-img {
+	width: 45%;
+    padding-top: 20px;
+    margin-left: 200px;
+}
+
+.container{
+	margin-top: 10px;
+
+}
+.character-avatar{
+	width:50%;
+}
+.char-css{
+	
+	background-color: white;
+	border: 2px solid black;
+	text-align: center;
+	color:green;
+	
+	display:inline-block;
+}
+
+.char-css:hover{
+	opacity:0.8;
+}
+
+#characters{
+	height:150px;
+}
+
+figure {
+    margin: 0px 30px 0 60px;
+}
+
+#player, #cpu, #restart, #player, #cpu{
+	display: inline-block;
+}
+
+#btnAttack,#btnRestart{
+	vertical-align: middle;
+}
+
+.fighting-arena{
+    background-image: url('../images/arena-bg.gif');
+	height:330px;
+	text-align: center;
+	color:white;
+	text-align:center;
+	font-size: 18px;	
+
+}
