@@ -1,6 +1,33 @@
 //Global Variable - Declare variables to be accessed on any function
-    //1: Game needs player, cpu, hp, attack value, scores for players and cpu
-    //2: Create an array or object for characters? Refer to Cobweb activity...
+ 
+ //1: Game needs player, cpu, hp, attack value, scores for players and cpu
+var player;
+var cpu;
+
+var attackStrength;
+var playerScore;
+var cpuScore;
+
+ //2: Create an array or object for characters? Refer to Cobweb activity...
+var characters = [{
+
+	name: "Spiderman";
+	hp: 1500,
+	strengthAttack: 75
+},
+{	name: "Wolverine";
+	hp: 3000,
+	strengthAttack: 150
+},
+{	name: "Oscar"
+	hp: 500,
+	strengthAttack: 300
+},
+{
+	name: "Big Bird"
+	hp: 5000,
+	strengthAttack: 20
+}];
 
 // Setting function before the fight
     
