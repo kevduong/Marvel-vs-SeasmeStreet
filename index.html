@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+        <link rel="stylsheet" type='text/css' href="assets/css/animate.css">
+             
+              <title>Marvel vs Sesame Street</title>
+    </head>
+    <body>
+      <!-- Header -->
+       <div class="container">
+           <div class="row">
+               <div class="col-lg-2"></div>
+                  <div class="col-lg-8">
+                   <img class="header-img" src="assets/images/header.png">
+               </div>
+           </div>
+       </div>
+    
+    <!-- Game Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                <div id="msgCharacters" class="row"></div>
+                <!---Characters -->
+                   <div id="characters" class="row">
+                    
+                    <figure id="0" class="char-css character">
+                        <figcaption>Spiderman</figcaption>
+                        <img class="character-avatar" src="assets/images/spiderman.png">
+                        <figcaption>1</figcaption>
+                    </figure>
+                    
+                    <figure id="1" class="char-css character">
+                        <figcaption>Wolverine</figcaption>
+                        <img class="character-avatar" src="assets/images/wolverine.png"/>
+                        <figcaption>2</figcaption>
+                    </figure>
+                    
+                    <figure id="2" class="char-css character">
+                        <figcaption>Oscar</figcaption>
+                        <img class="character-avatar" src="assets/images/oscar.png">
+                        <figcaption>3</figcaption>
+                    </figure>
+                    
+                    <figure id="3" class="char-css character">
+                        <figcaption>Big Bird</figcaption>
+                        <img class="character-avatar" src="assets/images/big-bird.png">
+                        <figcaption>4</figcaption>
+                    </figure>
+                    
+                </div>
+                <!-- Message in Fighting Arena -->
+                    <div id="message" class="row"></div>
+                <!-- Fighting Arena Section -->
+                    <div class="row well fighting-arena">
+                        <div class="row"><h3>Fighting Arena</h3></div>
+                        <div class="row">
+                            
+                            <div id="chosenPlayer" class="col-lg-4"></div>
+                            
+                            <div id="attack" class="col-lg-4">
+                                <button id="btnAttackRestart" disabled="true">Attack</button>
+                            </div>
+                            
+                            <div id="cpu" class="col-lg-4"></div>
+                        </div>
+                    <div class="row">
+                        
+                            <div id="msgBattle" class="col-lg-12"></div>
+                    </div>
+                </div>
+        
+        
+        <div class="col-lg-2"></div>
+    </div>
+   
+</div>
+  
+  <div class="row">
+      <div class="row col-lg-4 col-lg-offset-8">
+          <button class="btn btn-success btn-xs themeButton"><span class="glyphicon glyphicon-music"></span> Play Song</button>		  	
+		    	<button class="btn btn-danger btn-xs pauseButton"><span class="glyphicon glyphicon-pause"></span> Pause Song</button>	
+      </div>
+  </div>
+   
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="assets/javascript/game.js"></script>
+    
+        </body>  
+    
+</html>
