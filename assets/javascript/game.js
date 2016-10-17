@@ -1,6 +1,7 @@
 //Global Variable - Declare variables to be accessed on any function
- 
- //1: Game needs player, cpu, hp, attack value, scores for players and cpu
+    //Step 1: Game needs player, cpu, hp, attack value, scores for players and cpu
+    //Step 2: Create an array or object for characters? Refer to Cobweb activity...
+
 var player;
 var cpu;
 
@@ -8,30 +9,31 @@ var attackStrength;
 var playerScore;
 var cpuScore;
 
- //2: Create an array or object for characters? Refer to Cobweb activity...
 var characters = [{
-
-	name: "Spiderman";
-	hp: 1500,
-	strengthAttack: 75
+   
+    name:"Spiderman",
+    hp: 1000,
+    attackStrength: 25
 },
-{	name: "Wolverine";
-	hp: 3000,
-	strengthAttack: 150
-},
-{	name: "Oscar"
-	hp: 500,
-	strengthAttack: 300
+{   name:"Wolverine",
+    hp: 2000,
+    attackStrength: 150
 },
 {
-	name: "Big Bird"
-	hp: 5000,
-	strengthAttack: 20
+    name:"Oscar",
+    hp: 750,
+    attackStrength: 200
+},
+{
+    name:"Big Bird",
+    hp: 3000,
+    attackStrength: 50
+    
 }];
-
 // Start Game
+
 fightNow();
-$('#characters').on('click', '.character', pickPlayerandCpu);
+$('#characters').on('click', '.character', selectCharacter);
 $('#btnAttackRestart').click(attackRestart);
 
 
@@ -69,18 +71,18 @@ function fightNow() {
 }
 
 
-// Pick a character
 
+// Pick a character
 function selectCharacter() {
     
     console.log ("start");
     
     if (player === undefined) {
         
-        player = parseInt($(this).attr('id')); // convert to integer & add
+        player = parseInt($(this).attr('id')); // convert to player variable to integer to add values for hp/attackstrength
         $('#chosenPlayer').prepend($(this));   //div goes behind selected character
-        playerScore = characters[player].hp;    
-        attackStrength = characters[player].attackStrength;
+        playerScore = characters[player].hp;   
+        attackStrength = characters[player].attackStrength; 
         $('#message').html("Pick enemy to fight");
         $('#msgCharacters').html("Available Enemies");
         
@@ -98,7 +100,6 @@ function selectCharacter() {
         }
     }
 }
-// Player clicks 'btnAttack' to reduce HP of CPU.
 
 function attackRestart() {
     if($('#btnAttackRestart').html() === "Restart") {
@@ -107,7 +108,7 @@ function attackRestart() {
         attack();
     }
 }
-// PLayer attacks and CPU attacks back
+
 function attack() {
     
     cpuScore -= attackStrength; 
@@ -118,11 +119,10 @@ function attack() {
     
     $('#msgBattle').html("<span>"+"You attacked "+characters[cpu].name+" for "+characters[player].attackStrength+" damage."+"</span>"+"<br>"
                         + "<span>" + characters[cpu].name + " attacked you back for " +characters[cpu].attackStrength + " damage."+"</span>");
-
+    
     whoWon();
 }
 
-//Conditions for tie, winning, losing
 function whoWon(){
         //Tie Game
     if(playerScore===0 && cpuScore===0){
@@ -139,7 +139,7 @@ function whoWon(){
      //Lose game over
     }else if(playerScore<0 && cpuScore<0){
         console.log("here 3");
-        $('#msgBattle').prepend("<span>"+"You lost. Better luck next time. Game over!"+"</span>"+"<br>");
+        $('#msgBattle').prepend("<span>"+"You loose. Game over...!"+"</span>"+"<br>");
         beforeRestart();
         return;
      //Beat one enemy
@@ -148,7 +148,7 @@ function whoWon(){
         $('#msgBattle').prepend("<span>"+"You defeated "+characters[cpu].name+"</span>"+"<br>");
         
         if($('#characters').children().length ===0){
-            $('#msgBattle').prepend("<span>"+"You defeated all the enemeis. WOOO!"+"</span>"+"<br>");
+            $('#msgBattle').prepend("<span>"+"You defeated all the enemeis. Yeh!"+"</span>"+"<br>");
             $('#msgCharacters').html("CONGRATULATIONS..!!!!");  
             beforeRestart();
         }else{
@@ -185,26 +185,3 @@ function restart(){
 }
 
 
-// Play/Pause Song //
-$(document).ready(function() {
-
-$(".themeButton").on("click", function(){
-                audioElement.play();
-            });
-
-            $(".pauseButton").on("click", function(){
-                audioElement.pause();
-            });
-
- var audioElement = document.createElement('audio');
-            audioElement.setAttribute('src', 'assets/8bit-sesamestreet.mp3');
-
-            // Theme Button
-            $(".themeButton").on("click", function(){
-                audioElement.play();
-            });
-
-            $(".pauseButton").on("click", function(){
-                audioElement.pause();
-            });
-});

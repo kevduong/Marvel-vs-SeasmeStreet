@@ -50,8 +50,15 @@ figure {
     background-image: url('../images/arena-bg.gif');
 	height:330px;
 	text-align: center;
-	color:white;
+	color: red;
 	text-align:center;
 	font-size: 18px;	
 
+}
+
+#msgBattle {
+    margin-top: 70px;
+    background-color: #E6DFB1;
+    opacity: .8;
+    color: crimson;
 }
