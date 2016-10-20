@@ -6,28 +6,28 @@ var player;
 var cpu;
 
 var attackStrength;
-var playerScore;
-var cpuScore;
+var playerHP;
+var cpuHP;
 
 var characters = [{
    
     name:"Spiderman",
     hp: 1000,
-    attackStrength: 25
+    attackStrength: 100
 },
 {   name:"Wolverine",
     hp: 2000,
-    attackStrength: 150
+    attackStrength: 100
 },
 {
     name:"Oscar",
     hp: 750,
-    attackStrength: 200
+    attackStrength: 100
 },
 {
     name:"Big Bird",
     hp: 3000,
-    attackStrength: 50
+    attackStrength: 100
     
 }];
 // Start Game
@@ -44,8 +44,8 @@ function fightNow() {
     player = undefined;
     cpu = undefined;
     attackStrength = 0;
-    playerScore = 0;
-    cpuScore = 0
+    playerHP = 0;
+    cpuHP = 0;
     
     //Loop - Add HP and Name variable to characters
     for(var i=0;i<characters.length;i++){
@@ -54,9 +54,6 @@ function fightNow() {
         $('#' + i +' > figcaption:first-child').text(characters[i].name); 
         //Replace fig by object hp value
         $('#'+ i +' > figcaption:last-child').text(characters[i].hp);
-        
-        //^^Ask Cameron or Charlie/Angie^^
-        console.log("why is # working but not #characters .character");
         
         
         //Messages and Buttons
@@ -79,18 +76,17 @@ function selectCharacter() {
     
     if (player === undefined) {
         
-        player = parseInt($(this).attr('id')); // convert to player variable to integer to add values for hp/attackstrength
-        $('#chosenPlayer').prepend($(this));   //div goes behind selected character
-        playerScore = characters[player].hp;   
-        attackStrength = characters[player].attackStrength; 
         $('#message').html("Pick enemy to fight");
         $('#msgCharacters').html("Available Enemies");
         
+        player = parseInt($(this).attr('id')); 
+        $('#chosenPlayer').prepend($(this));   //div goes behind selected character
+        playerHP = characters[player].hp;   
+        attackStrength = characters[player].attackStrength; 
+        
+        
     }else if (cpu === undefined){
         
-        cpu = parseInt($(this).attr('id'));
-        cpuScore = characters[cpu].hp;
-        $('#cpu').prepend($(this));
         $('#characters').children().prop("disabled", true);
         $('#btnAttackRestart').show();
         $('#btnAttackRestart').attr("disabled", false);
@@ -98,6 +94,11 @@ function selectCharacter() {
         if ($('#characters').children().length === 0) {
             $('#msgCharacters').html("No enemies left.");
         }
+        
+        cpu = parseInt($(this).attr('id'));
+        cpuHP = characters[cpu].hp;
+        $('#cpu').prepend($(this));
+        
     }
 }
 
@@ -110,45 +111,48 @@ function attackRestart() {
 }
 
 function attack() {
+   
+    cpuHP -= (attackStrength++ * .5);
+    playerHP -= characters[cpu].attackStrength;
     
-    cpuScore -= attackStrength; 
-    playerScore -= characters[cpu].attackStrength;
     
-    $('#'+ player +' > figcaption:last').text(playerScore);
-    $('#'+ cpu +' > figcaption:last').text(cpuScore);
     
-    $('#msgBattle').html("<span>"+"You attacked "+characters[cpu].name+" for "+characters[player].attackStrength+" damage."+"</span>"+"<br>"
-                        + "<span>" + characters[cpu].name + " attacked you back for " +characters[cpu].attackStrength + " damage."+"</span>");
+    $('#'+ player +' > figcaption:last').text(playerHP);
+    $('#'+ cpu +' > figcaption:last').text(cpuHP);
+    
+    $('#msgBattle').html("<span>"+"You attacked "+characters[cpu].name+" for "+(attackStrength++ * .5)+" damage."+"</span>"+"<br>"
+                        + "<span>" + characters[cpu].name + " attacked you back for " +characters[cpu].attackStrength + " damage."+"</span>")
+    .css('background-color', '#00664f');
     
     whoWon();
 }
 
 function whoWon(){
         //Tie Game
-    if(playerScore===0 && cpuScore===0){
-        console.log("here 1");
+    if(playerHP===0 && cpuHP===0){
+        console.log("tie");
         $('#message').html("<span>"+"It's a tie. Game over...!"+"</span>"+"<br>");
         beforeRestart();    
         return;
      //Defeated
-    }else if (playerScore <= 0 && cpuScore>0){
-        console.log("here 2");
+    }else if (playerHP <= 0 && cpuHP>0){
+        console.log("defeated");
         $('#message').html("<span>"+"You got defeated by "+characters[cpu].name+". Game over...!"+"</span>"+"<br>");
         beforeRestart();
         return;
      //Lose game over
-    }else if(playerScore<0 && cpuScore<0){
-        console.log("here 3");
-        $('#msgBattle').prepend("<span>"+"You loose. Game over...!"+"</span>"+"<br>");
+    }else if(playerHP<0 && cpuHP<0){
+        console.log("lost");
+        $('#msgBattle').prepend("<span>"+"You lost! Game over...!"+"</span>"+"<br>");
         beforeRestart();
         return;
      //Beat one enemy
-    }else if(playerScore>0 &&  cpuScore<=0){
-        console.log("here 4");      
+    }else if(playerHP>0 &&  cpuHP<=0){
+        console.log("win");      
         $('#msgBattle').prepend("<span>"+"You defeated "+characters[cpu].name+"</span>"+"<br>");
         
         if($('#characters').children().length ===0){
-            $('#msgBattle').prepend("<span>"+"You defeated all the enemeis. Yeh!"+"</span>"+"<br>");
+            $('#msgBattle').prepend("<span>"+"You defeated all everyone!"+"</span>"+"<br>");
             $('#msgCharacters').html("CONGRATULATIONS..!!!!");  
             beforeRestart();
         }else{
@@ -161,7 +165,7 @@ function whoWon(){
             $('#btnAttackRestart').attr("disabled",true);
             $('#characters').children().prop("disabled",false);
         }
-    }else if(defenderScore>0 &&  attackerScore>0){
+    }else if(cpuHP>0 &&  playerHP>0){
         console.log("here 5");
         $('#btnAttackRestart').attr("disabled",false);
     }
@@ -184,4 +188,26 @@ function restart(){
     fightNow();
 }
 
-
+//Play Music
+$(document).ready(function() {
+ 
+ $(".themeButton").on("click", function(){
+                 audioElement.play();
+            });
+ 
+            $(".pauseButton").on("click", function(){
+                audioElement.pause();
+            });
+ 
+ var audioElement = document.createElement('audio');
+            audioElement.setAttribute('src', 'assets/8bit-sesamestreet.mp3');
+ 
+            // Theme Button
+            $(".themeButton").on("click", function(){
+                audioElement.play();
+             });
+ 
+            $(".pauseButton").on("click", function(){
+                 audioElement.pause();
+             });
+ });

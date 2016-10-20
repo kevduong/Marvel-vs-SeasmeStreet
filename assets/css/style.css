@@ -1,6 +1,9 @@
 body {
     background-image: url('../images/background.jpg');
     background-size: cover;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    color: white;
 }
 
 .header-img {
@@ -49,16 +52,21 @@ figure {
 .fighting-arena{
     background-image: url('../images/arena-bg.gif');
 	height:330px;
-	text-align: center;
-	color: red;
-	text-align:center;
-	font-size: 18px;	
+    text-align: center;
+    color: red;
+}
 
+.fighting-arena h3 {
+    text-align: center;
+	color: yellow;
+    -webkit-text-stroke: 1px red;
+	text-align:center;
+	font-size: 24px;
+    font-family: 'Press Start 2P', cursive;
 }
 
 #msgBattle {
-    margin-top: 70px;
-    background-color: #E6DFB1;
+    margin-top: 100px;
     opacity: .8;
-    color: crimson;
+    color: white;
 }
