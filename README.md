@@ -5,7 +5,7 @@
 ----------
 Simple fighting game featuring Spiderman, Wolverine, Oscar and Big Bird.
 
-[link](https://marvel-vs-sesame-street.herokuapp.com/)
+[Play here](https://marvel-vs-sesame-street.herokuapp.com/)
 ----------
 
 **Technologies**
